@@ -45,7 +45,7 @@ public class BlogController {
 	}
 
 	@RequestMapping(value = "/listofblogs/{approved}", method = RequestMethod.GET)
-	public ResponseEntity<?> getAllBlogs(@RequestBody @PathVariable boolean approved, HttpSession session) {
+	public ResponseEntity<?> getAllBlogs(@PathVariable boolean approved, HttpSession session) {
 		Users users = (Users) session.getAttribute("user");
 		if (users == null) {
 			Error error = new Error(3, "Unauthorised user");

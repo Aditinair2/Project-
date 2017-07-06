@@ -12,13 +12,13 @@ app.factory('BlogPostService',function($http){
 		return $http.get("http://localhost:8080/backend_project2/listofblogs/"+true)
 	}
 	blogPostService.blogsWaitingForApproval=function(){
-		return $http.post("http://localhost:8080/backend_project2/listofblogs/"+false)
+		return $http.get("http://localhost:8080/backend_project2/listofblogs/"+false)
 	}
 	blogPostService.getBlogPost=function(id){
 		return $http.get("http://localhost:8080/backend_project2/getblogpost/"+id)
 	}
-	blogPostService.updateBlogPost=function(){
-		return $http.put("/http://localhost:8080/backend_project2/updateblogpost",blogpost)
+	blogPostService.updateBlogPost=function(blogPost){
+		return $http.put("/http://localhost:8080/backend_project2/updateblogpost",blogPost)
 	}
 	blogPostService.addComment=function(){
 		return $http.post("/http://localhost:8080/backend_project2/addblogcomment",blogComment)
