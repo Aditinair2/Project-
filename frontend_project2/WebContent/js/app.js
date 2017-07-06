@@ -36,8 +36,11 @@ app.config(function($routeProvider) {
 })
 
 app.run(function($rootScope, $location, UserService, $cookieStore) {
+	
 	if ($rootScope.currentUser = undefined)
+		
 		$rootScope.currentUser = $cookieStore.get("currentUser")
+		console.log($rootScope.currentUser.username)
 
 	$rootScope.logout = function() {
 		UserService.logout().then(function(response) {

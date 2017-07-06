@@ -1,8 +1,7 @@
 /**
  * 
  */
-app.controller('UserController', function(UserService, $scope, $location,
-		$rootScope, $cookieStore) {
+app.controller('UserController', function(UserService, $scope, $location,$rootScope, $cookieStore) {
 	$scope.registrationSuccess=''
 	$scope.register = function() {
 		UserService.registerUser($scope.user).then(function(response) {
