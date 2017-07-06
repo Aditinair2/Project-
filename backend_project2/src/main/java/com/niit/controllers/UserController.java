@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +50,7 @@ public class UserController {
 	}
 
 	@RequestMapping (value="/login",method=RequestMethod.POST)
-	public ResponseEntity<?> login(Users users, HttpSession session){
+	public ResponseEntity<?> login(@RequestBody Users users, HttpSession session){
 		Users validUser=usersDao.login(users);
 		if(validUser==null){
 			Error error=new Error(3,"Invalid username and password...please enter valid details");

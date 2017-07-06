@@ -1,7 +1,7 @@
 /**
  * angularjs m
  */
-var app = angular.module("myApp", [ 'ngRoute' ])
+var app = angular.module("app", [ 'ngRoute','ngCookies' ])
 app.config(function($routeProvider) {
 	$routeProvider.when('/registration', {
 		templateUrl : 'views/registrationform.html',
@@ -18,15 +18,26 @@ app.config(function($routeProvider) {
 		templateUrl:'views/jobtitles.html',
 		controller:'JobController'
 	})
-	
-	.otherwise({
+	.when('/saveblogpost',{
+		templateUrl:'views/blogpostform.html',
+		controller:'BlogPostController'
+	})
+	.when('/getallblogs',{
+		templateUrl:'views/bloglist.html',
+		controller:'BlogPostController'
+	})
+	.when('/getBlogForApproval/:id',{
+		templateUrl:'views/approvalform.html',
+		controller:'BlogDetailController'
+	})
+	.otherwise('/',{
 		templateUrl : 'views/home.html'
 	})
 })
 
-app.run(function($rootscope, $location, UserService, $cookieStore) {
+app.run(function($rootScope, $location, UserService, $cookieStore) {
 	if ($rootScope.currentUser = undefined)
-		$rootscope.currentUser = $cookieStore.get("currentUser")
+		$rootScope.currentUser = $cookieStore.get("currentUser")
 
 	$rootScope.logout = function() {
 		UserService.logout().then(function(response) {

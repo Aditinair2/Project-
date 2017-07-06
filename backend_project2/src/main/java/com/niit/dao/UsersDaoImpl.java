@@ -38,9 +38,9 @@ public class UsersDaoImpl implements UsersDao {
 		query.setString(0, users.getUsername());//for assigning the value to the parameter username.
 		query.setString(1, users.getPassword());
 		query.setBoolean(2, true);
-		Users validUsers=(Users)query.uniqueResult();
+		Users validUser=(Users)query.uniqueResult();
 		session.close();
-		return validUsers;
+		return validUser;
 	}
 	public Users updateUser(Users validUser)
 	{
