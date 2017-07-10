@@ -47,6 +47,13 @@ public class BlogPostDaoImpl implements BlogPostDao{
 		session.close();
 		
 	}
-	
+	public List<BlogComment> getBlogComments(int blogId) {
+		Session session=sessionFactory.openSession();
+		BlogPost blogPost=(BlogPost) session.get(BlogPost.class, blogId);
+		List<BlogComment> blogComments=blogPost.getBlogComments();
+		session.close();
+		return blogComments;
+	}
+
 
 }

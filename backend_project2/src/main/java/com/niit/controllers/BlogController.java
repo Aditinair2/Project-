@@ -95,5 +95,24 @@ public class BlogController {
 			return new ResponseEntity<Error>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	@RequestMapping(value="/getblogcomments/{blogId}",method=RequestMethod.GET)
+	public ResponseEntity<?> getBlogComments(@PathVariable int blogId, HttpSession session){
+		System.out.println("enterting getBlogComments");
+		Users users=(Users) session.getAttribute("user");
+		if(users==null){
+			Error error=new Error(3,"Unauthorised user");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		}
+		try{
+		
+			List<BlogComment> blogComments=blogPostDao.getBlogComments(blogId);
+			
+		    return new ResponseEntity<List<BlogComment>>(blogComments,HttpStatus.OK);
+		}catch(Exception e){
+			Error error=new Error(6,"unable to insert the comments");
+			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	}
 
-}
+

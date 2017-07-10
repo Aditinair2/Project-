@@ -1,14 +1,26 @@
-<div class="row">\
+<div class="row">
 <div>
 <div class="panel panel-default">
 <div class="panel-heading">
 <div>{{blogPost.title}}</div>
+
+
 <span><strong>Created By:</strong>{{blogPost.createdby.username}}</span>
 <span><strong>On:</strong>{{blogPost.postedOn | date:'medium'}}</span>
 </div>
 <div class="panel-body">{{blogpost.description}}</div>
 </div></div></div>
+<div>
 <form>
 <textarea rows="3" cols="20" ng-model="blogComment.body"></textarea><br>
-<button ng-click="addComment()" name="Post Comment" class="btn btn-default"></a>
+<button ng-click="addComment()" class="btn btn-default">POST COMMENT</button>
 </form>
+<a href="" ng-click="getBlogComments(blogPost.id)">Show blog Comments</a>
+<ul ng-show="showComments">
+<li ng-repeat="comments in blogComments" style="list-style: none;">
+<div>
+{{comment.body}}
+<span><strong>Commented By</strong>{{comment.commentedBy.username}}</span>
+<span><strong>Commented On</strong>{{comment.commentedOn | date:'MM/dd/yyyy</span>
+</div>
+</li></ul></div>

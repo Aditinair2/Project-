@@ -1,15 +1,21 @@
 package com.niit.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="blogpost")
@@ -25,6 +31,9 @@ private String description;
 private Users createdBy;
 private Date postedOn;
 private boolean approved;
+@OneToMany(mappedBy="blogPost",fetch=FetchType.EAGER ,cascade=CascadeType.ALL)
+@JsonIgnore
+List<BlogComment> blogComments;
 public int getId() {
 	return id;
 }
@@ -60,6 +69,12 @@ public boolean isApproved() {
 }
 public void setApproved(boolean approved) {
 	this.approved = approved;
+}
+public List<BlogComment> getBlogComments() {
+	return blogComments;
+}
+public void setBlogComments(List<BlogComment> blogComments) {
+	this.blogComments = blogComments;
 }
 
 }

@@ -18,10 +18,13 @@ app.factory('BlogPostService',function($http){
 		return $http.get("http://localhost:8080/backend_project2/getblogpost/"+id)
 	}
 	blogPostService.updateBlogPost=function(blogPost){
-		return $http.put("/http://localhost:8080/backend_project2/updateblogpost",blogPost)
+		return $http.put("http://localhost:8080/backend_project2/updateblogpost",blogPost)
 	}
-	blogPostService.addComment=function(){
-		return $http.post("/http://localhost:8080/backend_project2/addblogcomment",blogComment)
+	blogPostService.addComment=function(blogComment){
+		return $http.post("http://localhost:8080/backend_project2/addblogcomment",blogComment)
+	}
+	blogPostService.getBlogComments=function(blogId){
+		return $http.get("http://localhost:8080/backend_project2/getblogcomments/"+blogId)
 	}
 	return blogPostService;
 })

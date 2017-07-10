@@ -30,6 +30,10 @@ app.config(function($routeProvider) {
 		templateUrl:'views/approvalform.html',
 		controller:'BlogDetailController'
 	})
+	.when('/getBlogDetail/:id',{
+		templateUrl:'views/blogdetail.html',
+		controller:'BlogDetailController'
+	})
 	.otherwise('/',{
 		templateUrl : 'views/home.html'
 	})
@@ -37,13 +41,14 @@ app.config(function($routeProvider) {
 
 app.run(function($rootScope, $location, UserService, $cookieStore) {
 	
-	if ($rootScope.currentUser = undefined)
-		
-		$rootScope.currentUser = $cookieStore.get("currentUser")
+	if ($rootScope.currentUser == undefined)
+		 $rootScope.currentUser = $cookieStore.get("currentUser")
 		//console.log($rootScope.currentUser.username)
 
 	$rootScope.logout = function() {
 		UserService.logout().then(function(response) {
+			$rootScope.currentUser.firstname=null
+			$rootScope.currentUser.role=null
 			$rootScope.message = "loggedout successfully..."
 			delete $rootScope
 			$cookieStore.remove("currentUser")
