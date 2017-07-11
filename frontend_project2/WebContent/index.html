@@ -31,6 +31,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#/saveblogpost" ng-show="currentUser.firstname">Add Blog Post</a></li>
+      <li><a href="#/suggestedusers" ng-show="currentUser.firstname">Friend Suggestions</a></li>
 					
 					    <li><a href="" ng-show="currentUser.firstname">Welcome {{currentUser.firstname}} &nbsp; {{currentUser.lastname}} </a></li>
 						<li><a href="" ng-click="logout()"ng-show="currentUser.firstname">logout</a></li>
@@ -63,4 +64,6 @@
     <script type="text/javascript" src="controller/blogcontroller.js"></script>
     <script type="text/javascript" src="services/blogpostservice.js"></script>
     <script type="text/javascript" src="controller/blogdetailcontroller.js"></script>
+    <script type="text/javascript" src="services/friendservice.js"></script>
+    <script type="text/javascript" src="controller/friendcontroller"></script>
 </html>

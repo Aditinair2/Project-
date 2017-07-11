@@ -35,7 +35,7 @@ button:hover {
     background-color: #f44336;
 }
 
-.imgcontainer {
+ .imgcontainer {
     text-align: center;
     margin: 24px 0 12px 0;
 }
@@ -43,7 +43,7 @@ button:hover {
 img.avatar {
     width: 40%;
     border-radius: 50%;
-} 
+}  
 .container {
     padding: 16px;
 }
@@ -53,15 +53,7 @@ span.psw {
     padding-top: 16px;
 }
 
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-       display: block;
-       float: none;
-    }
-    .cancelbtn {
-       width: 100%;
-    }
+
 }
 </style>
 </head>
@@ -69,16 +61,22 @@ span.psw {
 
 <h2>Login</h2>
 
-<form action="/action_page.php">
-  <div class="imgcontainer">
-    <img src="/Users/aditinair/git/Project-/frontend_project2/WebContent/images/image.png" alt="Avatar" class="avatar">
-  </div>
+<form >
+   <div class="imgcontainer">
+    <img src="images/image.png" alt="Avatar" class="avatar">
+  </div> 
 
-  <div class="container">
+<!--   <div class="container"> -->
+<div>
+{{message}}
+
     <label><b>Username</b></label>
-    <input type="text" placeholder="Enter Username" name="username" required>
-
+   <input type="text" ng-model="user.username" placeholder="enter username">
+   
     <label><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="password" required>
+    <input type="password" ng-model="user.password" placeholder="enter password">
         
-    <button type="submit">Login</button>
+    <input type="submit" value="Login" ng-click="login()">
+    </div>
+ </form>
+ </body></html>
