@@ -33,9 +33,8 @@ public class JobController {
 	 try{
 		 if(users.getRole().equals("Admin")){
 			 job.setPostedOn(new Date());
-		 
-		 jobDao.saveJob(job);
-		 return new ResponseEntity<Void>(HttpStatus.OK);
+			 jobDao.saveJob(job);
+		    return new ResponseEntity<Void>(HttpStatus.OK);
 		 }
 		 else
 		 {
@@ -63,7 +62,7 @@ public ResponseEntity<?> getAllJobs(HttpSession session){
 }
 @RequestMapping(value="/getjobbyid/{id}",method=RequestMethod.GET)
 public ResponseEntity<?> getJobById(@PathVariable int id, HttpSession session){
-	Users users=(Users)session.getAttribute("users");
+	Users users=(Users)session.getAttribute("user");
 	if(users==null){
 		Error error=new Error(3,"Unauthorized user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);

@@ -8,13 +8,9 @@ Search<input ng-model="jobTitle">
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="j in jobs | filter:search">
+<tr ng-repeat="j in jobs">
 <td><a href="" ng-click="getJobDetail(j.id)">{{j.jobTitle}}</a></td><td>{{j.postedOn | date:'yyyy:MM:dd'}}</td>
-<td>{{job.jobTitle}} </td><td> {{job.postedOn | date:'yyyy:MM:dd'}} </td>
 </tr>
-
-
-
 </tbody>
 </table>
 <div ng-show="showdetails">
@@ -26,6 +22,5 @@ Search<input ng-model="jobTitle">
 <b>Location : </b>{{job.location}}<br>
 <b>Salary : </b>{{job.Salary}}<br>
 <b>Company Name : </b>{{job.companyName}}<br>
-
 </div>
 </div>

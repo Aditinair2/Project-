@@ -30,12 +30,13 @@ public class JobDaoImpl implements JobDao{
 		session.close();
 		return jobs;
 	}
-
-	public Job getJobById(int id){
+	public Job getJobById(int id) {
 		Session session=sessionFactory.openSession();
 		Job job=(Job)session.get(Job.class, id);
 		session.close();
 		return job;
 	
 	}
+
+	
 }

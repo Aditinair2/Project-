@@ -77,5 +77,7 @@ public void setBlogComments(List<BlogComment> blogComments) {
 	this.blogComments = blogComments;
 }
 
+
+
 }
 

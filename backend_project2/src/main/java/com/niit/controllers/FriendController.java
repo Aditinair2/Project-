@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.niit.dao.FriendDao;
 import com.niit.model.Users;
 import com.niit.model.Error;
+import com.niit.model.Friend;
 
 import java.util.List;
 
@@ -22,9 +23,14 @@ import org.springframework.http.ResponseEntity;
 public class FriendController {
 @Autowired
 private FriendDao friendDao;
-@RequestMapping(value="/suggestedUsersList",method=RequestMethod.POST)
-public ResponseEntity<?> getSuggestedUsersList(@RequestBody Users users)
+@RequestMapping(value="/suggesteduserslist",method=RequestMethod.GET)
+public ResponseEntity<?> getSuggestedUsersList( HttpSession session)
 {
+	Users users=(Users)session.getAttribute("user");
+	if(users==null){
+		Error error=new Error(3,"Unauthorised user");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+	}
 	List<Users> suggestedUsers=friendDao.listOfSuggestedUsers(users.getUsername());
 	return new ResponseEntity<List<Users>>(suggestedUsers,HttpStatus.OK);
 	
@@ -39,5 +45,27 @@ public ResponseEntity<?> friendRequest(@PathVariable String toUsername,HttpSessi
 	String fromUsername=users.getUsername();
 	friendDao.friendRequest(fromUsername, toUsername);
 	return new ResponseEntity<Void>(HttpStatus.OK);
+}
+@RequestMapping(value="/pendingrequests",method=RequestMethod.GET)
+public ResponseEntity<?> pendingRequests(HttpSession session){
+	Users users=(Users)session.getAttribute("user");
+	if(users==null){
+		Error error=new Error(3,"Unauthorised user");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+	}
+	List<Friend> pendingRequests= friendDao.listOFPendingRequests(users.getUsername());
+	return new ResponseEntity<List<Friend>>(pendingRequests,HttpStatus.OK);
+}
+@RequestMapping(value="/updatependingrequest/{fromId}/{status}",method=RequestMethod.PUT)
+public ResponseEntity<?> updatePendingRequests(@PathVariable String fromId,@PathVariable char status,HttpSession session){
+	Users users=(Users)session.getAttribute("user");
+	if(users==null){
+		Error error=new Error(3,"Unauthorised user");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+		
+	}
+	friendDao.updatePendingRequest(fromId, users.getUsername(), status);
+	return new ResponseEntity<Void>(HttpStatus.OK);
+	
 }
 }

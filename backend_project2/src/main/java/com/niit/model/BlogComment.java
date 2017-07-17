@@ -21,9 +21,8 @@ public class BlogComment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@ManyToOne
-	
 	private Users commentedBy;
-	private Date commentOn;
+	private Date commentedOn;
 	@ManyToOne(cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
 	@JoinColumn(name="blogpost_id")
 	@JsonIgnore
@@ -41,11 +40,11 @@ public class BlogComment {
 	public void setCommentedBy(Users commentedBy) {
 		this.commentedBy = commentedBy;
 	}
-	public Date getCommentOn() {
-		return commentOn;
+	public Date getCommentedOn() {
+		return commentedOn;
 	}
-	public void setCommentOn(Date commentOn) {
-		this.commentOn = commentOn;
+	public void setCommentedOn(Date commentOn) {
+		this.commentedOn = commentOn;
 	}
 	public BlogPost getBlogPost() {
 		return blogPost;

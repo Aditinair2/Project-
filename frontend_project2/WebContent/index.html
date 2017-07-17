@@ -26,12 +26,14 @@
 						<li><a href="#/login" ng-hide="currentUser.firstname">Login</a></li>
 						<li><a href="#/savejob" ng-show="currentUser.role=='Admin'">Save Job Details</a></li>
 						<li><a href="#/getalljobs" ng-show="currentUser.firstname">GetAllJobs</a></li>
-						<li><a href="#/getallblogs" ng-show="currentUser.role=='Admin'">view all blogs</a></li>
+						<li><a href="#/getallblogs" ng-show="currentUser.firstname">View Blogs</a></li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a href="#/saveblogpost" ng-show="currentUser.firstname">Add Blog Post</a></li>
       <li><a href="#/suggestedusers" ng-show="currentUser.firstname">Friend Suggestions</a></li>
+      <li><a href="#/pendingrequests" ng-show="currentUser.firstname">Pending Requests</a></li>
+      <li><a href="#/listoffriends" ng-show="currentUser.firstname">Friends</a></li>
 					
 					    <li><a href="" ng-show="currentUser.firstname">Welcome {{currentUser.firstname}} &nbsp; {{currentUser.lastname}} </a></li>
 						<li><a href="" ng-click="logout()"ng-show="currentUser.firstname">logout</a></li>
@@ -65,5 +67,5 @@
     <script type="text/javascript" src="services/blogpostservice.js"></script>
     <script type="text/javascript" src="controller/blogdetailcontroller.js"></script>
     <script type="text/javascript" src="services/friendservice.js"></script>
-    <script type="text/javascript" src="controller/friendcontroller"></script>
+    <script type="text/javascript" src="controller/friendcontroller.js"></script>
 </html>

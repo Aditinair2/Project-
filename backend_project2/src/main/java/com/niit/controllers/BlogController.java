@@ -78,26 +78,30 @@ public class BlogController {
 		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 
-	@RequestMapping(value = "/addblogcomment", method = RequestMethod.POST)
-	public ResponseEntity<?> addBlogComment(@RequestBody BlogComment blogComment, HttpSession session) {
-		Users users = (Users) session.getAttribute("users");
-		if (users == null) {
-			Error error = new Error(3, "Unauthorized user");
-			return new ResponseEntity<Error>(error, HttpStatus.UNAUTHORIZED);
+	@RequestMapping(value="/addblogcomment", method=RequestMethod.POST)
+	public ResponseEntity<?> addBlogComment(@RequestBody BlogComment blogComment,HttpSession session)
+	{
+		Users users=(Users) session.getAttribute("user");
+		if(users==null)
+		{
+			Error error=new Error(3,"Unauthorized user");
+			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		try {
-			blogComment.setCommentedBy(users);
-			blogComment.setCommentOn(new Date());
-			blogPostDao.addcomment(blogComment);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch (Exception e) {
-			Error error = new Error(4, "Unable to add comment" + e.getMessage());
-			return new ResponseEntity<Error>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+		try{
+		blogComment.setCommentedBy(users);
+		blogComment.setCommentedOn(new Date());
+		blogPostDao.addcomment(blogComment);
+		return new ResponseEntity<Void>(HttpStatus.OK);
+		}catch(Exception e)
+		{
+			Error error=new Error(4,"Unable to post comment"+ e.getMessage());
+			return new ResponseEntity<Error>(error,HttpStatus.INTERNAL_SERVER_ERROR); 
 		}
+		
 	}
 	@RequestMapping(value="/getblogcomments/{blogId}",method=RequestMethod.GET)
 	public ResponseEntity<?> getBlogComments(@PathVariable int blogId, HttpSession session){
-		System.out.println("enterting getBlogComments");
+		System.out.println("enterting getBlogComment");
 		Users users=(Users) session.getAttribute("user");
 		if(users==null){
 			Error error=new Error(3,"Unauthorised user");

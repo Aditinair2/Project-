@@ -41,8 +41,8 @@ button:hover {
 }
 
 img.avatar {
-    width: 40%;
-    border-radius: 50%;
+    width: 20%;
+    border-radius: 30%;
 }  
 .container {
     padding: 16px;
@@ -61,14 +61,14 @@ span.psw {
 
 <h2>Login</h2>
 
+
 <form >
    <div class="imgcontainer">
     <img src="images/image.png" alt="Avatar" class="avatar">
   </div> 
-
+{{message}}
 <!--   <div class="container"> -->
 <div>
-{{message}}
 
     <label><b>Username</b></label>
    <input type="text" ng-model="user.username" placeholder="enter username">

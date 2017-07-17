@@ -65,7 +65,7 @@ public class UserController {
 		
 	}
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public ResponseEntity<?> getAllJobs(HttpSession session)
+	public ResponseEntity<?> logout(HttpSession session)
 	{
 		Users users=(Users)session.getAttribute("user");
 		if(users==null){

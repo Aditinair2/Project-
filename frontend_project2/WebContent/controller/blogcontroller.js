@@ -41,5 +41,6 @@ $scope.blogsWaitingForApproval=BlogPostService.blogsWaitingForApproval().then(fu
 
 
 })
+
 })
 
