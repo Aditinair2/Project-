@@ -9,4 +9,5 @@ public interface UsersDao {
  List<Users> getallUsers();
 Users login(Users users);
 Users updateUser(Users users);
+Users getUserByUsername(String username);
 }

@@ -56,27 +56,32 @@ span.psw {
 
 }
 </style>
+{{error}}
+{{message}}
 </head>
 <body>
 
 <h2>Login</h2>
 
 
-<form >
+<form class="form" name="loginForm" novalidate>
    <div class="imgcontainer">
     <img src="images/image.png" alt="Avatar" class="avatar">
   </div> 
-{{message}}
+
 <!--   <div class="container"> -->
-<div>
+<div class="form_group">
 
     <label><b>Username</b></label>
-   <input type="text" ng-model="user.username" placeholder="enter username">
+   <input type="text" ng-model="user.username" placeholder="enter username" class="form_input" required/>
+   <span ng-show="loginForm.username.$invalid && !loginForm.username.$dirty" style="color:red;">Username cannot be blank</span>
    
     <label><b>Password</b></label>
-    <input type="password" ng-model="user.password" placeholder="enter password">
+    <input type="password" ng-model="user.password" placeholder="enter password" class="form_input" required/>
+    <!-- <span ng-show="loginForm.password.$invalid && !loginForm.password.$pristine" style="color:red;">Password cannot be blank</span> -->
+    
         
-    <input type="submit" value="Login" ng-click="login()">
+    <input type="submit" value="Login"  ng-disabled="loginForm.$invalid"ng-click="login()">
     </div>
  </form>
  </body></html>

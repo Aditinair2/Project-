@@ -46,6 +46,13 @@ app.config(function($routeProvider) {
 		templateUrl:'views/listoffriends.html',
 		controller:'FriendController'
 	})
+	.when('/profilepic',{
+		templateUrl:'views/profilepicture.html'
+	})
+	.when('/edituserprofile',{
+		templateUrl:'views/updateprofile.html',
+		controller:'UserController'
+	})
 	.otherwise('/',{
 		templateUrl : 'views/home.html'
 	})
