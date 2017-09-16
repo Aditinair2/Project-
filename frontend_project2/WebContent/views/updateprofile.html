@@ -1,6 +1,6 @@
 Update Details
 <form>
-<input type="text" ng-model="user.firstname" placeholder="Enter firstname"><br>
+<input type="text" ng-model="user.firstname" placeholder="Enter firstname" ><br>
 <input type="text" ng-model="user.lastname" placeholder="Enter lastname"><br>
 <input type="text" ng-model="user.email" placeholder="Enter Email"><br>
 <input type="text" ng-model="user.username" placeholder="Enter username" disabled="true"><br>
@@ -8,8 +8,9 @@ Update Details
 <input type="radio" ng-model="user.role" value="Alumini">Alumini
 <input type="radio" ng-model="user.role" value="Employee">Employee
 <br>
-<input type="submit" ng-click="update()"><br>
+<input type="submit"  value="Edit" ng-click="update()"><br>
 
 
 
 </form>
+<span style="color:red">{{error.message}}</span>

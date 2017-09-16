@@ -28,7 +28,7 @@
 						<li><a href="#/savejob" ng-show="currentUser.role=='Admin'">Save Job Details</a></li>
 						<li><a href="#/getalljobs" ng-show="currentUser.firstname">GetAllJobs</a></li>
 						<li><a href="#/getallblogs" ng-show="currentUser.firstname">View Blogs</a></li>
-						<li><a href="#/edituserprofile">Edit Profile</a></li>
+						<li><a href="#/edituserprofile" ng-show="currentUser.firstname">Edit Profile</a></li>
       
     </ul>
     <ul class="nav navbar-nav navbar-right">
@@ -71,4 +71,12 @@
     <script type="text/javascript" src="controller/blogdetailcontroller.js"></script>
     <script type="text/javascript" src="services/friendservice.js"></script>
     <script type="text/javascript" src="controller/friendcontroller.js"></script>
+    <script type="text/javascript" src="controller/wallcontroller.js"></script>
+    <script src="js/sockjs/sockjs.js"></script>
+    <script src="js/stomp/dist/stomp.js"></script>
+    <script type="text/javascript" src="controller/chatcontroller.js"></script>
+    <script type="text/javascript" src="services/chatservice.js"></script>
+    <script type="text/javascript" src="controller/messagecontroller.js"></script>
+    <script type="text/javascript" src="services/messagecontroller.js"></script>
+    
 </html>

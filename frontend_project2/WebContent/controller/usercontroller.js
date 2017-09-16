@@ -31,8 +31,8 @@ app.controller('UserController', function(UserService, $scope, $location,$rootSc
 	})
 	
 	$scope.update=function(){
-		UserService.updateUserProfile($scope.userobj).then(function(response){
-			$scope.message="Update theprofile successfully"
+		UserService.updateUserProfile($scope.user).then(function(response){
+			$scope.message="Updated the profile successfully"
 		},function(response){
 			console.log(response.data)
 		

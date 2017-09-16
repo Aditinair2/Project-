@@ -50,8 +50,8 @@ public class UserController {
 	}
 
 	@RequestMapping (value="/login",method=RequestMethod.POST)
-	public ResponseEntity<?> login(@RequestBody Users users, HttpSession session){
-		Users validUser=usersDao.login(users);
+	public ResponseEntity<?> login(@RequestBody Users user, HttpSession session){
+		Users validUser=usersDao.login(user);
 		if(validUser==null){
 			Error error=new Error(3,"Invalid username and password...please enter valid details");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
@@ -92,6 +92,7 @@ public class UserController {
 		return new ResponseEntity<Users>(users,HttpStatus.OK);
 			
 		}
+	@RequestMapping(value="/updateprofile",method=RequestMethod.PUT)
 	public ResponseEntity<?> updateUserProfile(@RequestBody Users user,HttpSession session){
 		Users users=(Users)session.getAttribute("user");
 		if(users==null){
