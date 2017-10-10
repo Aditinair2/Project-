@@ -26,5 +26,11 @@ app.factory('BlogPostService',function($http){
 	blogPostService.getBlogComments=function(blogId){
 		return $http.get("http://localhost:8080/backend_project2/getblogcomments/"+blogId)
 	}
+	blogPostService.viewWall=function(username){
+		return $http.get("http://localhost:8080/backend_project2/wall/"+username)
+	}
+	blogPostService.addCommentWall=function(blog){
+		return $http.put("http:/localhost:8080/backend_project2/addcommentwall",blog)
+	}
 	return blogPostService;
 })

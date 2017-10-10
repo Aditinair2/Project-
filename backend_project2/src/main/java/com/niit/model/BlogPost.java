@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name="blogpost")
@@ -32,7 +33,7 @@ private Users createdBy;
 private Date postedOn;
 private boolean approved;
 @OneToMany(mappedBy="blogPost",fetch=FetchType.EAGER ,cascade=CascadeType.ALL)
-@JsonIgnore
+@JsonManagedReference
 List<BlogComment> blogComments;
 public int getId() {
 	return id;

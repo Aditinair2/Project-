@@ -1,16 +1,38 @@
-<table>
+<div>
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: $font-family;
+    font-size: $font-size;
+    /* background-size: 200% 100% !important;
+    animation: move 10s ease infinite;
+    transform: translate3d(0, 0, 0); */
+/*     background: linear-gradient(45deg, #49D49D 10%, #A2C7E5 90%); */
+    background-image:url("images/white.jpg") ; */
+    background-size: cover;
+    height: 100vh
+}
+</style>
+<table class="table">
 <thead>
 <tr>
-<th>Firstname</th><th>Lastname</th><th>Online Status</th><th>Friend Request</th>
+<th>First Name</th><th>Last Name</th><th>Role</th><th>ONLINE/OFFLINE</th><th>Friend Request</th>
 </tr>
 </thead>
 <tbody>
-<tr ng-repeat="user in suggestedUsers">
-<td>{{user.firstname}}</td><td>{{user.lastname}}</td><td>{{user.role}}</td>
-<td ng-if="user.online">Yes</td>
-<td ng-if="!user.online">No</td>
-
-<td><a href="" ng-click="friendrequest(user.username)" class="btn btn-default">Send Friend Request</a></td>
+<tr data-ng-repeat="user in suggestedUsers">
+<!-- <td><img src="http://localhost:8080/BackEndProjectTwo/getimage/{{user.username}}" alt="" width="150px" height="150px" class="img-rounded"></td> -->
+<td>{{user.firstName}}</td>
+<td>{{user.lastName}}</td>
+<td>{{user.role}}</td>
+<td data-ng-if="user.online">ONLINE</td>
+<td data-ng-if="!user.online">OFFLINE</td>
+<td><a href="" data-ng-click="friendRequest(user.username)" class="btn btn-default">Add Friend</a></td>
 </tr>
 </tbody>
 </table>
+</div>

@@ -26,13 +26,13 @@ public class UsersDaoImpl implements UsersDao {
 	public List<Users> getallUsers() {
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from Users");
+		@SuppressWarnings("unchecked")
 		List<Users> users=query.list();
 		session.close();
 		return users;
 	}
 	public Users login(Users users)
 	{
-		System.out.println(users.getUsername() +" "+ users.getPassword());
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from Users where username=? and password=? and enabled=?");
 		query.setString(0, users.getUsername());//for assigning the value to the parameter username.
@@ -45,7 +45,6 @@ public class UsersDaoImpl implements UsersDao {
 	public Users updateUser(Users validUser)
 	{
 		Session session=sessionFactory.openSession();
-		//update table set on_line=true where username='john'
 		session.update(validUser);
 		session.flush();
 		session.close();
@@ -56,9 +55,9 @@ public class UsersDaoImpl implements UsersDao {
 
 	public Users getUserByUsername(String username) {
 		Session session=sessionFactory.openSession();
-		Users users=(Users)session.get(Users.class, username);
+		Users user=(Users)session.get(Users.class, username);
 		session.close();
-		return users;
+		return user;
     
 
 	}

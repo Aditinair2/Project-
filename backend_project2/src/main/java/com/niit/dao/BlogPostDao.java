@@ -16,5 +16,9 @@ public interface BlogPostDao {
 
 	void addcomment(BlogComment blogComment);
 	List<BlogComment> getBlogComments(int blogId);
+	List<BlogComment> getBlogComments2(BlogPost blogPost);
+	List<BlogPost>getBlogs(String username);
+	void addCommentWall(int blogId,String comment,String user);
+	void updateBlog(BlogPost blogPost);
 
 }

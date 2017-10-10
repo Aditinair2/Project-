@@ -25,13 +25,13 @@ public class JobController {
  private JobDao jobDao;
  @RequestMapping(value="/savejob", method=RequestMethod.POST)
  public ResponseEntity<?> saveJob(@RequestBody Job job,HttpSession session){
-	 Users users=(Users)session.getAttribute("user");
-	 if(users==null){
+	 Users user=(Users)session.getAttribute("user");
+	 if(user==null){
 		 Error error=new Error(3,"Unauthorized user");
 		 return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 	 }
 	 try{
-		 if(users.getRole().equals("Admin")){
+		 if(user.getRole().equals("Admin")){
 			 job.setPostedOn(new Date());
 			 jobDao.saveJob(job);
 		    return new ResponseEntity<Void>(HttpStatus.OK);
@@ -49,21 +49,17 @@ public class JobController {
  }
  
 @RequestMapping(value="/getalljobs",method=RequestMethod.GET)
-public ResponseEntity<?> getAllJobs(HttpSession session){
-	Users users=(Users)session.getAttribute("user");
-	if(users==null){
-		Error error=new Error(3,"Unauthorized user");
-		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
-		
-	}
+public ResponseEntity<?> getAllJobs()
+{
+	
 	List<Job> jobs=jobDao.getAllJobs();
 	return new ResponseEntity<List<Job>>(jobs,HttpStatus.OK);
 	
 }
-@RequestMapping(value="/getjobbyid/{id}",method=RequestMethod.GET)
+@RequestMapping(value="/viewjob/{id}",method=RequestMethod.GET)
 public ResponseEntity<?> getJobById(@PathVariable int id, HttpSession session){
-	Users users=(Users)session.getAttribute("user");
-	if(users==null){
+	Users user=(Users)session.getAttribute("user");
+	if(user==null){
 		Error error=new Error(3,"Unauthorized user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		

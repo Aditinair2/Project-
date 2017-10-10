@@ -1,11 +1,10 @@
 /**
  * 
  */
-app.controller('BlogPostController', function($scope,BlogPostService,$location) {
-    $scope.message=''
+app.controller('BlogController', function($scope,BlogPostService,$location) {
 	$scope.saveBlogPost=function(){
-		BlogPostService.saveBlog($scope.blogPost).then(function(response){
-			$scope.success="Blog post is inserted successfully and waiting for approval"
+		BlogPostService.saveBlogPost($scope.blogPost).then(function(response){
+			$scope.message="Blog post is inserted successfully and waiting for approval"
 				$location.path('/getallblogs')
 		},function(response){
 			scope.message=response.data.message
@@ -26,7 +25,7 @@ app.controller('BlogPostController', function($scope,BlogPostService,$location) 
 }
 		
 $scope.blogsApproved=BlogPostService.blogsApproved().then(function(response){
-	$scope.blogsApproved=response.data;
+	$scope.blogsApproved=response.data
 	
 },function(response){
 	console.log(response.status)

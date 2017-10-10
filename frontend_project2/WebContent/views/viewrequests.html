@@ -21,7 +21,7 @@ body {
 <table class="table" data-ng-hide="message">
 <tr data-ng-repeat="user in pendingRequests">
 <td>{{user.fromId}}</td>
-<td><a href="" data-ng-click="acceptOrRejectRequest(user.fromId,'A')" class="btn btn-default" data-ng-hide="message">Accept</a> </td>
+<td><a href="" data-ng-click="updatePendingRequest(user.fromId,'A')" class="btn btn-default" data-ng-hide="message">Accept</a> </td>
 <td><a href="" data-ng-click="acceptOrRejectRequest(user.fromId,'D')" class="btn btn-default" data-ng-hide="message">Reject</a> </td>
 </tr>
 </table>

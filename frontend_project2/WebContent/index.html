@@ -2,47 +2,56 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<script type="text/javascript"
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
-<link rel="stylesheet"
-	href="//netdna.bootstrapcdn.com/font-awsome/4.0.0/css/font-awsome.css">
-	<script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.js"></script>
+	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css"
+	rel="stylesheet" />
 <title>Socio</title>
 </head>
 <body ng-app="app">
 	<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/">Socio</a>
-    </div>
-    <ul class="nav navbar-nav">
-      <li><a href="#/registration" ng-hide="currentUser.firstname">Register</a></li>
-						<li><a href="#/login" ng-hide="currentUser.firstname">Login</a></li>
-						<li><a href="#/profilepic" ng-show=currentUser.username><img src="http://localhost:8080/backend_project2/getimage/{{currentUser.username}}" alt="Upload image" width="30px" height="30px" class="img-rounded"></a></li>
-						<li><a href="#/savejob" ng-show="currentUser.role=='Admin'">Save Job Details</a></li>
-						<li><a href="#/getalljobs" ng-show="currentUser.firstname">GetAllJobs</a></li>
-						<li><a href="#/getallblogs" ng-show="currentUser.firstname">View Blogs</a></li>
-						<li><a href="#/edituserprofile" ng-show="currentUser.firstname">Edit Profile</a></li>
-      
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li><a href="#/saveblogpost" ng-show="currentUser.firstname">Add Blog Post</a></li>
-      <li><a href="#/suggestedusers" ng-show="currentUser.firstname">Friend Suggestions</a></li>
-      <li><a href="#/pendingrequests" ng-show="currentUser.firstname">Pending Requests</a></li>
-      <li><a href="#/listoffriends" ng-show="currentUser.firstname">Friends</a></li>
-      <li><a href="#/chat" ng-show="currentUser.username">Chat</a></li>
-					
-					    <li><a href="" ng-show="currentUser.firstname">Welcome {{currentUser.firstname}} &nbsp; {{currentUser.lastname}} </a></li>
-						<li><a href="" ng-click="logout()"ng-show="currentUser.firstname">logout</a></li>
-    </ul>
-  </div>
-</nav>
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/">Socio</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#/registration" ng-hide="currentUser.firstname">Register</a></li>
+				<li><a href="#/login" ng-hide="currentUser.firstname">Login</a></li>
+				<li><a href="#/profilepic" ng-show=currentUser.username><img
+						src="http://localhost:8080/backend_project2/getimage/{{currentUser.username}}"
+						alt="Upload image" width="30px" height="30px" class="img-rounded"></a></li>
+				<li><a href="#/savejob" ng-show="currentUser.role=='Admin'">Save
+						Job Details</a></li>
+				<li><a href="#/getalljobs" ng-show="currentUser.firstname">GetAllJobs</a></li>
+				<li><a href="#/getallblogs" ng-show="currentUser.firstname">View
+						Blogs</a></li>
+				<li><a href="#/edituserprofile" ng-show="currentUser.firstname">Edit
+						Profile</a></li>
+
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#/saveblogpost" ng-show="currentUser.firstname">Add
+						Blog Post</a></li>
+				<li><a href="#/suggestedusers" ng-show="currentUser.firstname">Friend
+						Suggestions</a></li>
+				<li><a href="#/pendingrequests" ng-show="currentUser.firstname">Pending
+						Requests</a></li>
+				<li><a href="#/listoffriends" ng-show="currentUser.firstname">Friends</a></li>
+				<li><a href="#/chat" ng-show="currentUser.username">Chat</a></li>
+
+				<li><a href="" ng-show="currentUser.firstname">Welcome
+						{{currentUser.firstname}} &nbsp; {{currentUser.lastname}} </a></li>
+				<li><a href="" ng-click="logout()"
+					ng-show="currentUser.firstname">logout</a></li>
+			</ul>
+		</div>
+	</nav>
 	<div ng-view></div>
 
 

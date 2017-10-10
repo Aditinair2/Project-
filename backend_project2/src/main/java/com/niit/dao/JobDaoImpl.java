@@ -13,7 +13,7 @@ import com.niit.model.Job;
 @Repository
 public class JobDaoImpl implements JobDao{
 	@Autowired
-	private SessionFactory sessionFactory;
+   SessionFactory sessionFactory;
 	
 	
 	public void saveJob(Job job) {
@@ -26,6 +26,7 @@ public class JobDaoImpl implements JobDao{
 	public List<Job> getAllJobs() {
 		Session session=sessionFactory.openSession();
 		Query query=session.createQuery("from Job");
+		@SuppressWarnings("unchecked")
 		List<Job> jobs=query.list();
 		session.close();
 		return jobs;

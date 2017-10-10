@@ -18,15 +18,12 @@ public class FriendDaoImpl implements FriendDao{
 
 	public List<Users> listOfSuggestedUsers(String username) {
 		Session session=sessionFactory.openSession();
-		SQLQuery sqlQuery=session.createSQLQuery("select * from users_info where username in"
-		+"(select username from users_info where username!=? minus"
-				+"(select fromId from Friend where toId=? union"
-		+"(select toId from Friend where fromId=?))");
-		sqlQuery.setString(0, username);
-		sqlQuery.setString(1, username);
-		sqlQuery.setString(2, username);
-		sqlQuery.addEntity(Users.class);
-		List<Users> suggestedUsersList=sqlQuery.list();
+		SQLQuery query=session.createSQLQuery("select * from Users_info where username in"+"(select username from Users_info where username!=? minus (select fromid from Friend where toid=? union select toid from Friend where fromid=? ))");
+		query.setString(0, username);
+		query.setString(1, username);
+		query.setString(2, username);
+		query.addEntity(Users.class);
+		List<Users> suggestedUsersList=query.list();
 		session.close();
 		return suggestedUsersList;
 	}
@@ -40,11 +37,12 @@ public class FriendDaoImpl implements FriendDao{
 	    session.flush();
 	    session.close();
 	}
-	public List<Friend> listOFPendingRequests(String loggedinUsername) {
+	public List<Friend> listOFPendingRequests(String toUsername) {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Friend where toId=? and status=?");
-		query.setString(0, loggedinUsername);
+		Query query=session.createQuery("from Friend where toId=? AND status=?");
+		query.setString(0, toUsername);
 		query.setCharacter(1, 'P');
+		@SuppressWarnings("unchecked")
 		List<Friend> pendingRequests=query.list();
 		session.close();
 		
@@ -52,7 +50,7 @@ public class FriendDaoImpl implements FriendDao{
 	}
 	public void updatePendingRequest(String fromId, String toId, char status) {
 		Session session=sessionFactory.openSession();
-		Query query=session.createQuery("from Friend where fromId=? and toId=?");
+		Query query=session.createQuery("from Friend where fromId=? AND toId=?");
 		query.setString(0, fromId);
 		query.setString(1, toId);
 		Friend friend=(Friend)query.uniqueResult();
@@ -67,6 +65,7 @@ public class FriendDaoImpl implements FriendDao{
 		query.setString(0, username);
 		query.setString(1, username);
 		query.setCharacter(2, 'A');
+		@SuppressWarnings("unchecked")
 		List<Friend> friends=query.list();
 		session.close();
 		return friends;

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,21 +28,23 @@ public class UserController {
 		try {
 
 			user.setEnabled(true);
-			List<Users> users = usersDao.getallUsers();
+			List<Users> userList = usersDao.getallUsers();
 
-			for (Users u : users)
+			for (Users u : userList)
 				if (u.getUsername().equals(user.getUsername())) {
 					Error error = new Error(2, "Username already exists");
 					return new ResponseEntity<Error>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 
 				}
-		System.out.println(user.getUsername() +" "+ user.getFirstname() +" "+ user.getEmail());
+		
 		
 
-			// user.setOnline(false);
+		    user.setOnline(false);
 			usersDao.registration(user);
 			return new ResponseEntity<Void>(HttpStatus.CREATED);
-		} catch (Exception e) {
+		} 
+		catch (Exception e) 
+		{
 		    Error error = new Error(1, "Cannot register user details");
 			return new ResponseEntity<Error>(error, HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -58,7 +61,7 @@ public class UserController {
 		}
 		else{
 			validUser.setOnline(true);
-			validUser=usersDao.updateUser(validUser);
+			usersDao.updateUser(validUser);
 			session.setAttribute("user",validUser);
 			return new ResponseEntity<Users>(validUser,HttpStatus.OK);
 		}
@@ -67,42 +70,56 @@ public class UserController {
 	@RequestMapping(value="/logout",method=RequestMethod.GET)
 	public ResponseEntity<?> logout(HttpSession session)
 	{
-		Users users=(Users)session.getAttribute("user");
-		if(users==null){
+		Users user=(Users)session.getAttribute("user");
+		if(user==null){
 			Error error=new Error(3,"Unauthorized user");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 			
 			
 		}
-		System.out.println("is session new for" +users.getUsername() + session.isNew());
-		users.setOnline(false);
-		usersDao.updateUser(users);
+		user.setOnline(false);
+		usersDao.updateUser(user);
 		session.removeAttribute("user");
 		session.invalidate();
-		return new ResponseEntity<Void>(HttpStatus.ACCEPTED);
+		return new ResponseEntity<Void>(HttpStatus.OK);
 	}
 	@RequestMapping(value="/getuserdetails",method=RequestMethod.GET)
-	public ResponseEntity<?> getUserDetails(HttpSession session){
-		Users users=(Users)session.getAttribute("user");
-		if(users==null){
+	public ResponseEntity<?> getUserByUsername(HttpSession session){
+		Users user=(Users)session.getAttribute("user");
+		if(user==null){
 			Error error=new Error(3,"Unauthorized user");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
-		users=usersDao.getUserByUsername(users.getUsername());
-		return new ResponseEntity<Users>(users,HttpStatus.OK);
+		user=usersDao.getUserByUsername(user.getUsername());
+		return new ResponseEntity<Users>(user,HttpStatus.OK);
 			
 		}
 	@RequestMapping(value="/updateprofile",method=RequestMethod.PUT)
-	public ResponseEntity<?> updateUserProfile(@RequestBody Users user,HttpSession session){
-		Users users=(Users)session.getAttribute("user");
-		if(users==null){
+	public ResponseEntity<?> updateUserProfile(@RequestBody Users users,HttpSession session){
+		Users user=(Users)session.getAttribute("user");
+		if(user==null){
 			Error error=new Error(3,"Unauthorized user");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
 		usersDao.updateUser(user);
 		return new ResponseEntity<Void>(HttpStatus.OK);
 		}
+	
+@RequestMapping(value="/viewFriend/{username}")
+public ResponseEntity<?> viewUserDetails(@PathVariable String username,HttpSession session)
+{
+	Users user=(Users) session.getAttribute("user");
+	if(user==null)
+	{
+		Error error=new Error(6,"Unauthorized user");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 	}
+	Users requiredUser=usersDao.getUserByUsername(username);
+	return new ResponseEntity<Users>(requiredUser,HttpStatus.OK);
+}
+}
+
+
 	
 	
 

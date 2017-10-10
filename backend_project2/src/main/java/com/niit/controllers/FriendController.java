@@ -26,12 +26,12 @@ private FriendDao friendDao;
 @RequestMapping(value="/suggesteduserslist",method=RequestMethod.GET)
 public ResponseEntity<?> getSuggestedUsersList( HttpSession session)
 {
-	Users users=(Users)session.getAttribute("user");
-	if(users==null){
+	Users user=(Users)session.getAttribute("user");
+	if(user==null){
 		Error error=new Error(3,"Unauthorised user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 	}
-	List<Users> suggestedUsers=friendDao.listOfSuggestedUsers(users.getUsername());
+	List<Users> suggestedUsers=friendDao.listOfSuggestedUsers(user.getUsername());
 	return new ResponseEntity<List<Users>>(suggestedUsers,HttpStatus.OK);
 	
 }
@@ -42,30 +42,51 @@ public ResponseEntity<?> friendRequest(@PathVariable String toUsername,HttpSessi
 		Error error=new Error(3,"Unauthorised user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 	}
-	String fromUsername=users.getUsername();
-	friendDao.friendRequest(fromUsername, toUsername);
+	
+	friendDao.friendRequest(users.getUsername(), toUsername);
 	return new ResponseEntity<Void>(HttpStatus.OK);
 }
 @RequestMapping(value="/pendingrequests",method=RequestMethod.GET)
 public ResponseEntity<?> pendingRequests(HttpSession session){
-	Users users=(Users)session.getAttribute("user");
-	if(users==null){
+	Users user=(Users)session.getAttribute("user");
+	if(user==null){
 		Error error=new Error(3,"Unauthorised user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 	}
-	List<Friend> pendingRequests= friendDao.listOFPendingRequests(users.getUsername());
+	List<Friend> pendingRequests= friendDao.listOFPendingRequests(user.getUsername());
+	if(pendingRequests.isEmpty())
+	{
+		Error error=new Error(5,"you have no pending requests");
+		return new ResponseEntity<Error>(error,HttpStatus.OK);
+	}
 	return new ResponseEntity<List<Friend>>(pendingRequests,HttpStatus.OK);
 }
 @RequestMapping(value="/updatependingrequest/{fromId}/{status}",method=RequestMethod.PUT)
-public ResponseEntity<?> updatePendingRequests(@PathVariable String fromId,@PathVariable char status,HttpSession session){
-	Users users=(Users)session.getAttribute("user");
-	if(users==null){
+public ResponseEntity<?> updatePendingRequests(@PathVariable String fromId,@PathVariable char status,HttpSession session)
+{
+	Users user=(Users)session.getAttribute("user");
+	if(user==null){
 		Error error=new Error(3,"Unauthorised user");
 		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		
 	}
-	friendDao.updatePendingRequest(fromId, users.getUsername(), status);
+	friendDao.updatePendingRequest(fromId, user.getUsername(), status);
 	return new ResponseEntity<Void>(HttpStatus.OK);
 	
 }
+@RequestMapping(value="/viewfriends",method=RequestMethod.GET)
+public ResponseEntity<?> getFriendList(HttpSession session)
+{
+	Users user=(Users) session.getAttribute("user");
+	if(user==null)
+	{
+		Error error=new Error(4,"Unauthorized");
+		return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
+	}
+	List<Friend> friendList=friendDao.listOfFriends(user.getUsername()); 
+	return new ResponseEntity<List<Friend>>(friendList,HttpStatus.OK);
 }
+}
+
+
+

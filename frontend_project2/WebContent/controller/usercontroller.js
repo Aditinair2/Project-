@@ -1,8 +1,8 @@
 /**
  * 
  */
-app.controller('UserController', function(UserService, $scope, $location,$rootScope, $cookieStore) {
-	$scope.registrationSuccess=''
+app.controller('UserController', function(UserService, $scope, $location,$rootScope, $cookieStore,$window) {
+	
 	$scope.register = function() {
 		UserService.registerUser($scope.user).then(function(response) {
 			$scope.registrationSuccess = "Registered successfully..please login.."
@@ -19,8 +19,9 @@ app.controller('UserController', function(UserService, $scope, $location,$rootSc
 			$location.path('/home')
 
 		}, function(response) {
-			$scope.message = response.data.message
+			$window.alert("Username or password is incorrect!Try Again")
 			$location.path('/login')
+			console.log(response.data)
 		})
 
 	}

@@ -8,6 +8,6 @@ public interface UsersDao {
  void registration (Users users);
  List<Users> getallUsers();
 Users login(Users users);
-Users updateUser(Users users);
+Users updateUser(Users validUser);
 Users getUserByUsername(String username);
 }

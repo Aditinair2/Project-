@@ -20,11 +20,11 @@ app.config(function($routeProvider) {
 	})
 	.when('/saveblogpost',{
 		templateUrl:'views/blogpostform.html',
-		controller:'BlogPostController'
+		controller:'BlogController'
 	})
 	.when('/getallblogs',{
 		templateUrl:'views/bloglist.html',
-		controller:'BlogPostController'
+		controller:'BlogController'
 	})
 	.when('/getBlogForApproval/:id',{
 		templateUrl:'views/approvalform.html',
@@ -45,6 +45,10 @@ app.config(function($routeProvider) {
 	.when('/listoffrriends',{
 		templateUrl:'views/listoffriends.html',
 		controller:'FriendController'
+	})
+	.when('/wall:usename',{
+		templateUrl:'views/wall.html',
+		controller:'WallController'
 	})
 	.when('/profilepic',{
 		templateUrl:'views/profilepicture.html'
@@ -67,7 +71,7 @@ app.run(function($rootScope, $location, UserService, $cookieStore) {
 	$rootScope.logout = function() {
 		UserService.logout().then(function(response) {
 			$rootScope.currentUser.firstname=null
-			$rootScope.currentUser.role=null
+			//$rootScope.currentUser.role=null
 			$rootScope.message = "loggedout successfully..."
 			delete $rootScope
 			$cookieStore.remove("currentUser")

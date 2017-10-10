@@ -10,7 +10,7 @@ app.factory('UserService',function($http){
 	 return $http.post("http://localhost:8080/backend_project2/login",user)
  }
  userService.logout=function(){
-	 return $http.get("http://localhost:8080/backend_project2/logout")
+	 return $http.get("http://localhost:8080/backend_project2/logout",user)
  }
  userService.getUserByUsername=function(){
 	 return $http.get("http://localhost:8080/backend_project2/getuserdetails")

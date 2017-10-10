@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,11 +22,12 @@ public class BlogComment {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	@ManyToOne
+	@JoinColumn(name="username")
 	private Users commentedBy;
 	private Date commentedOn;
-	@ManyToOne(cascade=CascadeType.ALL ,fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="blogpost_id")
-	@JsonIgnore
+	@JsonBackReference
 	private BlogPost blogPost;
 	private String body;
 	public int getId() {

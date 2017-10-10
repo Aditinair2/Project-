@@ -37,7 +37,7 @@ app.controller("WallController",function($scope,$location,BlogService,$window,$r
 	}
 */
 		function friendDetails(username){
-			FriendService.getFriendDetails(username).then(function(response){
+			FriendService.getDetails(username).then(function(response){
 				$scope.friendDetailsOne=response.data
 			},function(response){
 				$window.alert("Failed to fetch Friend Details. Read console for details")

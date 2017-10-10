@@ -25,29 +25,36 @@ public class ProfilePictureController {
 	
 	@RequestMapping(value="/uploadprofilepic",method=RequestMethod.POST)
 	public ResponseEntity<?> uploadProfilePicture(@RequestParam CommonsMultipartFile image,HttpSession session){
-		Users users=(Users)session.getAttribute("user");
-		if(users==null)   {
+		Users user=(Users)session.getAttribute("user");
+		if(user==null)   {
 			Error error=new Error(3,"Unauthorized user");
 			return new ResponseEntity<Error>(error,HttpStatus.UNAUTHORIZED);
 		}
 	ProfilePicture profilePicture=new ProfilePicture();
-	profilePicture.setUsername(users.getUsername());
+	profilePicture.setUsername(user.getUsername());
 	profilePicture.setImage(image.getBytes());
 	profilePictureDao.saveProfilePicture(profilePicture);
 	return new ResponseEntity<Void>(HttpStatus.OK);
 }
-	@RequestMapping(value="/getimage/(username)",method=RequestMethod.GET)
-	public @ResponseBody byte[] getProfilePic(@PathVariable String username,HttpSession session){
-		Users user=(Users)session.getAttribute("user");
-		if(user==null)
-			return null;
-		else{
-			ProfilePicture profilePic=profilePictureDao.getProfilePicture(username);
-			if(profilePic==null)
-				return null;
-			else
-				return profilePic.getImage();
-		}
-		
+	@RequestMapping(value="getimage/{username}",method=RequestMethod.GET)
+    public @ResponseBody byte[] getProfilePic(@PathVariable String username,HttpSession session)
+{
+	Users user=(Users) session.getAttribute("user");
+	if(user==null)
+	{
+		return null;
 	}
+	else
+	{
+		ProfilePicture profilePic=profilePictureDao.getProfilePicture(username);
+		if(profilePic==null)
+		{
+			return null;
+		}
+		else
+		{
+			return profilePic.getImage();
+		}
+	}
+}
 }
